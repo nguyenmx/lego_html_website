@@ -1,0 +1,166 @@
+<html>
+<body style="background-color:rgba(243, 231, 215, 0.744);">
+
+<style>
+    .capybara {
+      height: 300px;
+      width: 435;
+      margin-top: 20px;
+    }
+  </style>
+
+<style>
+  .pages {
+    position: relative;
+    top: -20px;
+  }
+  </style>
+
+<style>
+    .amongus {
+      height: 300px;
+      width: auto;
+      margin-top: 20px;
+    }
+  </style>
+
+<style>
+    .majestic-duck {
+      height: 300px;
+      width: 400;
+      margin-top: 20px;
+    }
+  </style>
+
+<head>
+    <title>LEGO: search sets</title>
+    <img src="https://i.pinimg.com/564x/4c/6e/80/4c6e803cbf70e1f74e35dcd13afe1924.jpg" alt="Description of your image" class="amongus">
+    <img src="https://i.pinimg.com/564x/89/6e/31/896e3171f016fb5edcc0adcca6c201d5.jpg" alt="Description of your image" class="majestic-duck">
+    <img src="https://media3.giphy.com/media/hi2kPofVMW70k/giphy.gif" alt="Description of your image" class="capybara">
+    <style>
+        table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		td {
+			padding: 10px;
+			border: 1px solid #071e30;
+			background-color: hsla(19, 73%, 44%, 0.352);
+		}
+
+        form>label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        form>label>span {
+            width: 90px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+  <form action="sets" method="get">
+    <span>Set Name:</span>
+      <input type="text" name=set_name value="{{params['set_name']}}">
+    <span>Theme Name:</span>
+      <input type="text" name=theme_name value="{{params['theme_name']}}">
+    <span>Part Count:</span>
+      <input type="text" name=part_count_from value="{{params['part_count_from']}}"> to
+      <input type="text" name=part_count_to value="{{params['part_count_to']}}">
+    <span> Results Per Page: </span>
+        <select name="limit">
+        <option value="10">10</option>
+        <option value="50">50</option>
+        <option value="200">200</option>
+    </select>
+    <span> Page: </span>
+    <select name = "offset" id="offset">
+      {% for page_num in range(1, total_pages + 1) %}
+      <option> {{page_num}} </option>
+      {% endfor %}
+    </select>
+    </div>
+
+    <button type="submit">Search</button>
+  </form>
+
+
+
+    {% if result_count > 0 %}
+    <h1>{{result_count}} results</h1>
+                
+     
+    
+    {% else %}
+    <h1>No results :(</h1>
+    {% endif %}
+
+    <table>
+        <tr>
+            <th class="column">
+              {% if params.sort_by != 'set_num' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=set_num&sort_dir=desc">Set Num</a>
+              {% elif params.sort_dir == 'asc' and params.sort_by == 'set_num' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=set_num&sort_dir=desc">Set Num↑</a>
+              {% elif params.sort_dir == 'desc' and params.sort_by == 'set_num' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=set_num&sort_dir=asc">Set Num↓</a>
+              {% endif %}
+            </th>
+
+            <th class="column">
+              {% if params.sort_by != 'theme_name' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=theme_name&sort_dir=desc">Theme Name</a>
+              {% elif params.sort_dir == 'asc' and params.sort_by == 'theme_name' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=theme_name&sort_dir=desc">Theme Name↑</a>
+              {% elif params.sort_dir == 'desc' and params.sort_by == 'theme_name' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=theme_name&sort_dir=asc">Theme Name↓</a>
+              {% endif %}
+           </th>
+
+           <th class="column">
+              {% if params.sort_by != 'set_name' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=set_name&sort_dir=desc">Set Name</a>
+              {% elif params.sort_dir == 'asc' and params.sort_by == 'set_name' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=set_name&sort_dir=desc">Set Name↓</a>
+              {% elif params.sort_dir == 'desc' and params.sort_by == 'set_name' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=set_name&sort_dir=asc">Set Name↑</a>
+              {% endif %}
+           </th>
+           
+           <th class="column">
+              {% if params.sort_by != 'year' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=year&sort_dir=desc">Year</a>
+              {% elif params.sort_dir == 'asc' and params.sort_by == 'year' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=year&sort_dir=desc">Year↓</a>
+              {% elif params.sort_dir == 'desc' and params.sort_by == 'year' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=year&sort_dir=asc">Year↑</a>
+              {% endif %}
+           </th>
+    
+           <th class="column">
+              {% if params.sort_by != 'parts_count' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=parts_count&sort_dir=desc">Part Count</a>
+              {% elif params.sort_dir == 'asc' and params.sort_by == 'parts_count' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=parts_count&sort_dir=desc">Part Count↓</a>
+              {% elif params.sort_dir == 'desc' and params.sort_by == 'parts_count' %}
+              <a href = "/sets?set_name={{params['set_name']}}&theme_name={{params['theme_name']}}&part_count_from={{params['part_count_from']}}&part_count_to={{params['part_count_to']}}&limit={{params['limit']}}&offset={{params['offset']}}&sort_by=parts_count&sort_dir=asc">Part Count↑</a>
+              {% endif %}
+           </th>
+
+        </tr>
+            <tbody>
+                {% for set in sets %}
+                <tr>
+                    <td>{{set.set_num}}</td>
+                    <td>{{set.set_name}}</td>
+                    <td>{{set.theme_name}}</td>
+                    <td>{{set.year}}</td>
+                    <td>{{set.parts_count}}</td>
+                </tr>
+                {% endfor %}
+            <tbody>
+    </table>
+
+</body>
